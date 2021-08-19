@@ -5,11 +5,14 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <title>Radio Shackle</title>
     <link rel="preconnect" href="https://fonts.gstatic.com">
+    <!-- For brand name -->
     <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
     <!-- for Now Plating FOnt Oswals -> font-family: 'Oswald', sans-serif; -->
     <link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
     <!-- For Station Name -->
     <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+    <!-- For Favourites header ROBOTO -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 
     <!-- For Station name in station selection -->
     <!--font-family: 'Noto Sans KR', sans-serif; -->
@@ -47,13 +50,13 @@
           font-family: 'Lobster', cursive;
           font-weight: 500;
           font-size: 2.5em;
-          text-align: left;
+          text-align: center;
           margin: 1%;
           padding-right: 1%;
           color: #FCA311;
-          border-right: 3px solid #FCA311; ;
+           ;
         }
-
+        /* border-right: 3px solid #FCA311; */
         /* //////////////////////////////////////////////////////////////////////////// */
         /* Main body containing player and radio sattions list*/
         /* Radio station body */
@@ -61,9 +64,41 @@
 
 
         }
-
-
+        /* Displays introduction to radio shackle */
+        .info_radio_shackle{
+          font-size: 1.2em;
+          text-align: center;
+          padding: 2%;
+          font-family: 'Fira Sans', sans-serif;
+          text-transform: uppercase;
+        }
+        /* displays header fav header  */
+        .favourite_header, .other_options_header{
+            font-family: 'Roboto', sans-serif;
+            text-transform: uppercase;
+            display: flex;
+            text-align:center;
+            width:100%;
+            justify-content: center;
+            align-items: center;
+        }
+        #favourite_header_image{
+          padding:5px;
+          margin: 0%
+        }
+        #other_options_header_image{
+          padding:5px;
+          margin: 0%;
+          height:50px;
+          width:50px;
+        }
+        /* .radio */
         /* Style for main div */
+        .radio_stations_family_favourite{
+          display: flex;
+          flex-direction: row;
+          padding: 2%;
+        }
         .radio_stations_body{
           display: flex;
           flex-direction: row;
@@ -144,8 +179,9 @@
         -moz-box-shadow: 0 -2px 4px 0 rgb(0 0 0 / 0.2);
         -webkit-box-shadow: 0 -2px 4px 0 rgb(0 0 0 / 0.2);
         transition: .2s;
-
       }
+
+
       /* Aligning Various Divs */
       .now_playing_radio_station_display_class{
         align-items: center;
@@ -198,7 +234,6 @@
         background: #FCA311;
         /*border:solid white 2px; */
         color: white;
-        visibility: visible;
         font-size: 2em;
         font-weight: 500;
         align-items: center;
@@ -257,6 +292,11 @@
 
       .footer{
         font-size:.75em;
+        animation: 1s;
+      }
+      /* font change for body */
+      .info_radio_shackle , .favourite_header, .other_options_header, .version{
+        font-size: .5em;
       }
       .now_playing_station_logo{
         margin-right: 6%;
@@ -268,7 +308,21 @@
         border-bottom: 1px solid #FCA311; ;
         font-size:1em;
       }
+      /* Image for favourite */
+      #favourite_header_image{
+        width: 90px;
+        height:60px;
+        padding:5%;
+      }
       /* Div Section*/
+
+      /* Style for family favourites */
+      .radio_stations_family_favourite{
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        padding:2%
+      }
       /* Style for div holding songs in light color */
       .radio_stations_body {
         display: flex;
@@ -290,6 +344,7 @@
         display: flex;
         flex-direction: row;
         box-sizing: border-box;
+        align-items: center;
       }
       /*Footer aka radio player */
       .audio_player_song_details{
@@ -297,7 +352,7 @@
       }
       .play_radio{
         font-size: .8em;
-        border-radius: 20%;
+        border-radius: 20px;
       }
       /*Player on top tags*/
       #top_bar_play_button{
@@ -324,16 +379,31 @@
       <span>Radio Shackle</span>
     </div>
 
+
     <!-- Displays details of current track being played -->
 
     <!-- To Display Name of radio station being played -->
     <!-- APSD -->
 
   </div>
-  <!-- contains radio stations and body -->
-  <div class="">
+  <!-- Radio Station Introduction -->
+  <div class="info_radio_shackle">
+    <p>Welcome to Radio Shackle!!!!</p>
+    Your one stop for connecting anywhere and everywhere in world. Click on button and you will experience a new world anda new culture
+  </div>
+  <!-- Heqader for Family Favourite -->
+  <div class="favourite_header">
+  <img id="favourite_header_image" src="https://img.icons8.com/emoji/96/000000/bookmark-emoji.png"/><span>Favourites</span>
+  </div>
+  <!-- contains radio stations awhich are family favourite-->
+  <div class="radio_stations_family_favourite">
 
   </div>
+  <!-- Header for rest of stations -->
+  <div class="other_options_header">
+  <img id="other_options_header_image" src="svg_and_images\other_options.png"/><span>Other Options</span>
+  </div>
+    <!-- contains radio stations and body -->
   <div class="radio_station_player_body">
 
     <!-- AUdio player -->
@@ -350,6 +420,9 @@
         <source id="audio_src"src="" type="audio/mpeg">
       </audio>
     </div>
+  </div>
+  <div class="version_information">
+    version: 8.02
   </div>
   <div class="footer">
 
@@ -390,31 +463,35 @@
   <script>
   //this is main object containing all radio sattions
   let allStations={
-    one_fm_913:{id:"one_fm_913",name:"One FM 913",country:"singapore",background:"white",url:"https://22253.live.streamtheworld.com/ONE_FM_913.mp3",logo:"https://www.onefm.sg/wp-content/assets/3/img/NAV_01_Logo_913-new.svg"},
-    money_fm_893:{id:"money_fm_893",name:"Money FM 893",country:"singapore",background:"white",url:"https://22253.live.streamtheworld.com/MONEY_893.mp3",logo:"https://www.moneyfm893.sg/wp-content/assets/2/img/NAV_01_Logo_893.svg"},
-    nrj_zurich_109:{id:"nrj_zurich_109",name:"Energy Zurich 109",country:"Swiss",background:"white",url:"https://energyzuerich.ice.infomaniak.ch/energyzuerich-high.mp3", logo:"https://upload.wikimedia.org/wikipedia/en/5/54/Logo_NRJ_2016.png"},
-    q_fm_102:{id:"q_fm_102",name:"Dublins Q102",country:"Ireland",background:"white",url:"https://wg.cdn.tibus.net/q102MP3128", logo:"https://mm.aiircdn.com/614/5d5fcba7241c4.png"},
-    wrs_fm:{id:"wrs_fm",name:"World Rasio Swiss",country:"Swiss",background:"white",url:"https://streamingr.broadcastradio.com:10295/wrs",logo:"https://mm.aiircdn.com/45/581c75ebd31ac.png"},
-    sunny_fm_102:{id:"sunny_fm_102",name:"Sunny FM",country:"Utah, USA",background:"white",url:"https://ice10.securenetsystems.net/KCLS", logo:"https://mysunny1015.com/wp-content/uploads/2019/03/logo-kcls-sunny-1015-dark-light.png"},
-    rosj_fm_96:{id:"rosj_fm_96",name:"Rock of St George Utah",country:"Utah, USA",background:"dark",url:"https://ice41.securenetsystems.net/KCLSHD2",logo:"https://rockstgeorge.com/wp-content/uploads/2019/03/logo-96X-rock-dark-light.png"},
-    mmm_fm_1049:{id:"mmm_fm_1049",name:"Triple M",country:"Melbourn, Australia",background:"dark",url:"https://ic3ti.scahw.com.au/3mmm_128",logo:"https://myradio-img-prod.scalabs.com.au/api/assets/72191957-f81d-40ff-8543-15d8a8b5ca90/"},
-    beat_fm_1025:{id:"beat_fm_1025",name:"Beat FM",country:"Jordan",background:"dark",url:"https://securestreams2.autopo.st:1242/live",logo:"https://mybeat.fm/assets/images//logo.png"},
-    mood_fm_jd:{id:"mood_fm_jd",name:"Mood FM",country:"Jordan",background:"dark",url:"https://securestreams2.autopo.st:1241/live",logo:"https://www.mood.fm/assets/images/mood_fm.png"},
-    breeze_fm_nz:{id:"breeze_fm_nz",name:"Breeze FM",country:"New Zealand",background:"white",url:"https://tunein-icecast.mediaworks.nz/breeze_tauranga_128kbps",logo:"http://thebreeze.co.nz/design/clientlibs/assets/breeze/imgs/ui/logo-mobile.svg"},
-    b_fm_899:{id:"b_fm_899",name:"BFM 89.9 Business News", country:"Malaysia",background:"dark",url:"https://22283.live.streamtheworld.com/BFMAAC.aac",logo:"https://www.bfm.my/themes/bfmmy/assets/images/bfm-logo.jpg"},
-    edge_fm_1021:{id:"edge_fm_1021",name:"Edge FM 102.1", country:"Camada",background:"dark",url:"https://corus.leanstream.co/CFNYFM",logo:"https://edge.ca/wp-content/uploads/sites/5/2021/02/hero_logo_380x170_edge.png"},
+    one_fm_913:{id:"one_fm_913",name:"One FM 913",country:"singapore",background:"white",fav:true,url:"https://22253.live.streamtheworld.com/ONE_FM_913.mp3",logo:"https://www.onefm.sg/wp-content/assets/3/img/NAV_01_Logo_913-new.svg"},
+    money_fm_893:{id:"money_fm_893",name:"Money FM 893",country:"singapore",background:"white",fav:false,url:"https://22253.live.streamtheworld.com/MONEY_893.mp3",logo:"https://www.moneyfm893.sg/wp-content/assets/2/img/NAV_01_Logo_893.svg"},
+    nrj_zurich_109:{id:"nrj_zurich_109",name:"Energy Zurich 109",country:"Swiss",background:"white",fav:false,url:"https://energyzuerich.ice.infomaniak.ch/energyzuerich-high.mp3", logo:"https://upload.wikimedia.org/wikipedia/en/5/54/Logo_NRJ_2016.png"},
+    q_fm_102:{id:"q_fm_102",name:"Dublins Q102",country:"Ireland",background:"white",fav:true,url:"https://wg.cdn.tibus.net/q102MP3128", logo:"https://mm.aiircdn.com/614/5d5fcba7241c4.png"},
+    wrs_fm:{id:"wrs_fm",name:"World Rasio Swiss",country:"Swiss",background:"white",fav:false,url:"https://streamingr.broadcastradio.com:10295/wrs",logo:"https://mm.aiircdn.com/45/581c75ebd31ac.png"},
+    sunny_fm_102:{id:"sunny_fm_102",name:"Sunny FM",country:"Utah, USA",background:"white",fav:false,url:"https://ice10.securenetsystems.net/KCLS", logo:"https://mysunny1015.com/wp-content/uploads/2019/03/logo-kcls-sunny-1015-dark-light.png"},
+    rosj_fm_96:{id:"rosj_fm_96",name:"Rock of St George Utah",country:"Utah, USA",background:"dark",fav:false,url:"https://ice41.securenetsystems.net/KCLSHD2",logo:"https://rockstgeorge.com/wp-content/uploads/2019/03/logo-96X-rock-dark-light.png"},
+    mmm_fm_1049:{id:"mmm_fm_1049",name:"Triple M",country:"Melbourn, Australia",background:"dark",fav:false,url:"https://ic3ti.scahw.com.au/3mmm_128",logo:"https://myradio-img-prod.scalabs.com.au/api/assets/72191957-f81d-40ff-8543-15d8a8b5ca90/"},
+    beat_fm_1025:{id:"beat_fm_1025",name:"Beat FM",country:"Jordan",background:"dark",fav:false,url:"https://securestreams2.autopo.st:1242/live",logo:"https://mybeat.fm/assets/images//logo.png"},
+    mood_fm_jd:{id:"mood_fm_jd",name:"Mood FM",country:"Jordan",background:"dark",fav:false,url:"https://securestreams2.autopo.st:1241/live",logo:"https://www.mood.fm/assets/images/mood_fm.png"},
+    breeze_fm_nz:{id:"breeze_fm_nz",name:"Breeze FM",country:"New Zealand",background:"white",fav:false,url:"https://tunein-icecast.mediaworks.nz/breeze_tauranga_128kbps",logo:"http://thebreeze.co.nz/design/clientlibs/assets/breeze/imgs/ui/logo-mobile.svg"},
+    b_fm_899:{id:"b_fm_899",name:"BFM 89.9 Business News", country:"Malaysia",background:"dark",fav:false,url:"https://22283.live.streamtheworld.com/BFMAAC.aac",logo:"https://www.bfm.my/themes/bfmmy/assets/images/bfm-logo.jpg"},
+    edge_fm_1021:{id:"edge_fm_1021",name:"Edge FM 102.1", country:"Camada",background:"dark",fav:false,url:"https://corus.leanstream.co/CFNYFM",logo:"https://edge.ca/wp-content/uploads/sites/5/2021/02/hero_logo_380x170_edge.png"},
     rmf_maxxx_fm:{id:"rmf_maxxx_fm",name:"RMF MAXX FM", country:"Poland",background:"dark",url:"https://rs9-krk2.rmfstream.pl/rmf_maxxx",logo:"https://www.rmfmaxxx.pl/assets-16/images/rmfmaxxx-logo.png"},
-    rmf_fm_pl:{id:"rmf_fm_pl",name:"RMF FM", country:"Poland",background:"white",url:"https://rs9-krk2.rmfstream.pl/rmf_fm",logo:"https://www.rmf.fm//2018/img/logo-bez-x2.png"},
-    vrock_fm_ch:{id:"vrock_fm_ch",name:"Virgin Rock", country:"Switzerland",background:"white",url:"https://icecast.argovia.ch/vrock",logo:"https://upload.wikimedia.org/wikipedia/commons/d/d1/VirginRadio.png"},
-    bloomberg_fm:{id:"bloomberg_fm",name:"Bloomberg Radio", country:"USA",background:"white",url:"https://24423.live.streamtheworld.com/WBBRAMAAC48.aac",logo:"https://upload.wikimedia.org/wikipedia/commons/6/6b/Bloomberg_Radio.png"},
+    rmf_fm_pl:{id:"rmf_fm_pl",name:"RMF FM", country:"Poland",background:"white",fav:false,url:"https://rs9-krk2.rmfstream.pl/rmf_fm",logo:"https://www.rmf.fm//2018/img/logo-bez-x2.png"},
+    vrock_fm_ch:{id:"vrock_fm_ch",name:"Virgin Rock", country:"Switzerland",background:"white",fav:false,url:"https://icecast.argovia.ch/vrock",logo:"https://upload.wikimedia.org/wikipedia/commons/d/d1/VirginRadio.png"},
+    bloomberg_fm:{id:"bloomberg_fm",name:"Bloomberg Radio", country:"USA",background:"white",fav:true,url:"https://24423.live.streamtheworld.com/WBBRAMAAC48.aac",logo:"https://upload.wikimedia.org/wikipedia/commons/6/6b/Bloomberg_Radio.png"},
     bloomberg_fm_backup:{id:"bloomberg_fm_backup",name:"Bloomberg Backup", country:"USA",background:"white",url:"https://18843.live.streamtheworld.com/WBBRAMAAC48.aac",logo:"https://upload.wikimedia.org/wikipedia/commons/6/6b/Bloomberg_Radio.png"},
     max_fm_1039:{id:"max_fm_1039",name:"Max FM 103.9", country:"Canada",background:"dark",url:"http://mbsradio.leanstream.co/CFQMFM-MP3",logo:"http://1039maxfm.com/wp-content/uploads/sites/8/2021/02/MAX103-color.png"},
-    radio_bern_1:{id:"radio_bern_1",name:"Radio Bern 1", country:"Swiss",background:"white",url:"https://mp3.radiobern1.ch/radiobern1128k", logo:"https://radioshackle-sjqq3.ondigitalocean.app/svg_and_images/radiobern1.png"},
+    radio_bern_1:{id:"radio_bern_1",name:"Radio Bern 1", country:"Swiss",background:"white",fav:true,url:"https://mp3.radiobern1.ch/radiobern1128k", logo:"https://radioshackle-sjqq3.ondigitalocean.app/svg_and_images/radiobern1.png"},
+    radio_klassik:{id:"radio_klassik",name:"Radio Klassik", country:"Germany",background:"white",fav:true,url:"https://edge01.streamonkey.net/klassikradio-live", logo:"https://www.klassikradio.de//_nuxt/img/72ebcae.png"},
+    radio_rundfunk_914:{id:"radio_rundfunk_914",name:"Berliner Rundfunk 91.4", country:"Germany",background:"white",fav:false,url:"https://topradio-stream26.radiohost.de/brf_mp3-128", logo:"https://www.berliner-rundfunk.de//_nuxt/3e020671c5416fa80e6b805f4364f376.svg"},
+
 }
 
   //dynamically creating radio allStations
   let mainRadioDiv=document.querySelector(".radio_stations_body")
   let mainRadioDivDark=document.querySelector(".radio_stations_body_dark")
+  let favRadioDiv=document.querySelector(".radio_stations_family_favourite")
 
   for(x in allStations){
     let station=allStations[x]
@@ -448,6 +525,9 @@
     //adding individual radio div to final div container
     if(station.background==="dark"){mainRadioDivDark.appendChild(newStation)}
     else{mainRadioDiv.appendChild(newStation)}
+    if(station.fav===true){
+      favRadioDiv.appendChild(newStation)
+    }
 
   }
   // initialisi9ng variable for bu8tton and audio player
@@ -457,6 +537,10 @@
   let stationLogo=document.querySelector("#now_playing_station_logo")
   let btnTopBar=document.querySelector("#top_bar_play_button")
   let btnMute=document.querySelector("#top_bar_mute_button")
+  let footer=document.querySelector(".footer")
+  footer.style.visibility="collapse"
+  //making audio player invisible at start
+
   //image variables
   const muteImage=" https://upload.wikimedia.org/wikipedia/commons/3/3f/Mute_Icon.svg"
   const unmuteImage="https://upload.wikimedia.org/wikipedia/commons/2/21/Speaker_Icon.svg"
@@ -487,6 +571,7 @@
             buttonVisiblity(PLAYING)
             console.log(`${allStations[station].id}`)
             isPlaying=true;
+            footer.style.visibility="visible"
             playButtonDesign();
         audioPlayer.play();
         })
@@ -547,6 +632,7 @@
     }
   }
 
+  //Mute Functionality for Button
   //Mute Functionality
   btnMute.addEventListener("click",()=>{
     if(isMute){
@@ -562,13 +648,15 @@
     }
 
   })
+
+
 //mute button Functionality
 function muteButtonDesign(){
   if(isMute) btnMute.src=unmuteImage;
   else btnMute.src=btnMute.src=muteImage
-
-
 }
+//Mute Function
+
 
   </script>
 </html>
