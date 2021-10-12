@@ -40,15 +40,15 @@ async function getDatafromStream(stationName,streamUrl){
 }
 //uses axios to fetch data from internet
 async function req(url){
-try{
-  let headers={headers:{Accept:'application/json'}}
-  let result=await axios.get(url,headers)
-  //console.log(result.data)
-  return result.data
-}
-catch(error){
-  console.log(error)
-  return null
-}
+  try{
+    let headers={headers:{Accept:'application/json'}}
+    let result=await axios.get(url,headers)
+    //console.log(result.data)
+    return result.data
+  }
+  catch(error){
+    console.log(error)
+    return null
+  }
 
 }

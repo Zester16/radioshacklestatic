@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <link rel="icon" type="image/png"  href="svg_and_images\radio_shackle.png">
     <title>Radio Shackle</title>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <!-- For brand name -->
@@ -38,14 +39,22 @@
         color: black;
         display: flex;
         flex-direction: row;
-        align-items:
+        align-items:center;
         margin:0 auto;
         padding:0;
         color: white;
         background: #14213D;
         width: 100%;
       }
-
+      /* Styling foe logo */
+      #brand_logo_header{
+        width: 60px;
+        height: 60px;
+        padding-left: 2px;
+        margin:2px;
+        visibility: visible;
+      }
+      /* Styling for brand name */
         .brand_name{
           font-family: 'Lobster', cursive;
           font-weight: 500;
@@ -92,15 +101,32 @@
           height:50px;
           width:50px;
         }
+        #virgin_group_header_image{
+          width: 80px;
+          height:50px;
+          margin: 0%;
+          padding:5px;
+        }
         /* .radio */
         /* Style for main div */
         .radio_stations_family_favourite{
           display: flex;
           flex-direction: row;
           padding: 2%;
+          flex-wrap: wrap;
+          justify-content:flex-start;
+        }
+        /* for div with virgin radio station */
+        .radio_stations_virgin{
+          display: flex;
+          flex-direction: row;
+          padding: 2%;
+          flex-wrap: wrap;
+          justify-content:flex-start;
+          background-color: #fd5c63
+          /* background-color: #fff2f2 */
 
         }
-
         .radio_stations_body{
           display: flex;
           flex-direction: row;
@@ -162,6 +188,11 @@
               height:60px;
               margin: 5%;
             }
+      .img_square{
+        width: 75px;
+        height:75px;
+        margin: 5px;
+      }
       /* Button with Up Arrow to show Div */
       #song_details_button{
         width: 30px;
@@ -181,7 +212,7 @@
         width: 100%;
         border-top-left-radius:2%;
         border-top-right-radius: 2%;
-
+        visibility: collapse;
         box-shadow: 0 -2px 4px 0 rgb(0 0 0 / 0.2);
         -moz-box-shadow: 0 -2px 4px 0 rgb(0 0 0 / 0.2);
         -webkit-box-shadow: 0 -2px 4px 0 rgb(0 0 0 / 0.2);
@@ -309,13 +340,27 @@
         height:90px;
         padding:5%;
       }
+      .img_square{
+        width: 90px;
+        height:90px;
+        margin: 5%;
+      }
       /*Changing header direwction */
       .header{
+        display: grid;
         flex-direction: column;
         position: fixed;
         width:100%;
         top:0;
 
+      }
+      /* for beand logo on header */
+      #brand_logo_header{
+        width: 0px;
+        height: 0px;
+        padding:0;
+        margin: 0;
+        visibility: collapse;
       }
 
       .footer{
@@ -349,8 +394,16 @@
         display: flex;
         flex-direction: column;
         flex-wrap: nowrap;
-        padding:2%
+        padding:2%;
       }
+      .radio_stations_virgin{
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        padding:2%;
+
+      }
+
       /* Style for div holding songs in light color */
       .radio_stations_body {
         display: flex;
@@ -403,8 +456,11 @@
   </head>
   <body>
   <div class="header">
+    <!-- Holding brand image -->
+    <img src="svg_and_images\radio_shackle.svg" alt="" id="brand_logo_header">
     <!-- Holding Brandname -->
     <div class="brand_name">
+
       <span>Radio Shackle</span>
     </div>
 
@@ -418,7 +474,7 @@
   <!-- Radio Station Introduction -->
   <div class="info_radio_shackle">
     <p>Welcome to Radio Shackle!!!!</p>
-    Your one stop for connecting anywhere and everywhere in world. Click on button and you will experience a new world anda new culture
+    Your one stop for connecting anywhere and everywhere in world. Click on button and you will experience a new world and a new culture.
   </div>
   <!-- Heqader for Family Favourite -->
   <div class="favourite_header">
@@ -428,6 +484,13 @@
   <div class="radio_stations_family_favourite">
 
   </div>
+  <!-- Heqader for Virgin Radio -->
+  <div class="favourite_header">
+  <img id="virgin_group_header_image" src="https://upload.wikimedia.org/wikipedia/commons/d/d1/VirginRadio.png"/><span>Virgin Group Radio Stations</span>
+  </div>
+  <div class="radio_stations_virgin">
+
+  </div>
   <!-- Header for rest of stations -->
   <div class="other_options_header">
   <img id="other_options_header_image" src="svg_and_images\other_options.png"/><span>Other Options</span>
@@ -435,7 +498,7 @@
     <!-- contains radio stations and body -->
   <div class="radio_station_player_body">
 
-    <!-- AUdio player -->
+    <!-- white background radio stations -->
 
     <div class="radio_stations_body">
 
@@ -451,8 +514,9 @@
     </div>
   </div>
   <div class="version_information">
-    version: 09.03
+    version: 09.05
   </div>
+  <!-- Holds Now playing and other details -->
   <div class="footer">
       <div class="footer_top">
         <!-- header tag for currently playing having  -->
@@ -528,20 +592,23 @@
     edge_fm_1021:{id:"edge_fm_1021",name:"Edge FM 102.1", country:"Camada",background:"dark",fav:false,url:"https://corus.leanstream.co/CFNYFM",logo:"https://edge.ca/wp-content/uploads/sites/5/2021/02/hero_logo_380x170_edge.png",stream:null},
     rmf_maxxx_fm:{id:"rmf_maxxx_fm",name:"RMF MAXX FM", country:"Poland",background:"dark",url:"https://rs9-krk2.rmfstream.pl/rmf_maxxx",logo:"https://www.rmfmaxxx.pl/assets-16/images/rmfmaxxx-logo.png",stream:null},
     rmf_fm_pl:{id:"rmf_fm_pl",name:"RMF FM", country:"Poland",background:"white",fav:false,url:"https://rs9-krk2.rmfstream.pl/rmf_fm",logo:"https://www.rmf.fm//2018/img/logo-bez-x2.png",stream:null},
-    vrock_fm_ch:{id:"vrock_fm_ch",name:"Virgin Rock", country:"Switzerland",background:"white",fav:false,url:"https://icecast.argovia.ch/vrock",logo:"https://upload.wikimedia.org/wikipedia/commons/d/d1/VirginRadio.png",stream:null},
+    vrock_fm_ch:{id:"vrock_fm_ch",name:"Virgin Rock", country:"Switzerland",background:"virgin",fav:false,url:"https://icecast.argovia.ch/vrock",logo:"https://upload.wikimedia.org/wikipedia/commons/d/d1/VirginRadio.png",stream:null},
     bloomberg_fm:{id:"bloomberg_fm",name:"Bloomberg Radio", country:"USA",background:"white",fav:true,url:"https://24423.live.streamtheworld.com/WBBRAMAAC48.aac",logo:"https://upload.wikimedia.org/wikipedia/commons/6/6b/Bloomberg_Radio.png",stream:null},
     bloomberg_fm_backup:{id:"bloomberg_fm_backup",name:"Bloomberg Backup", country:"USA",background:"white",url:"https://18843.live.streamtheworld.com/WBBRAMAAC48.aac",logo:"https://upload.wikimedia.org/wikipedia/commons/6/6b/Bloomberg_Radio.png",stream:null},
     max_fm_1039:{id:"max_fm_1039",name:"Max FM 103.9", country:"Canada",background:"dark",url:"http://mbsradio.leanstream.co/CFQMFM-MP3",logo:"http://1039maxfm.com/wp-content/uploads/sites/8/2021/02/MAX103-color.png",stream:null},
     radio_bern_1:{id:"radio_bern_1",name:"Radio Bern 1", country:"Swiss",background:"white",fav:true,url:"https://mp3.radiobern1.ch/radiobern1128k", logo:"https://radioshackle-sjqq3.ondigitalocean.app/svg_and_images/radiobern1.png",stream:"https://www.radiobern1.ch/api/pub/gql/radiobern/AudioLiveData/e8ed774ebb6a811303ea3ff7078581730ff3914c?ttl=10&variables=%7B%22streamName%22%3A%22radiobern.main%22%7D"},
     radio_klassik:{id:"radio_klassik",name:"Radio Klassik", country:"Germany",background:"white",fav:true,url:"https://edge01.streamonkey.net/klassikradio-live", logo:"https://www.klassikradio.de//_nuxt/img/72ebcae.png",stream:"https://api.iris-next.radiorepo.io/stream-service/696fff20-62da-474f-a092-4898d41776f3?"},
     radio_rundfunk_914:{id:"radio_rundfunk_914",name:"Berliner Rundfunk 91.4", country:"Germany",background:"white",fav:false,url:"https://stream.berliner-rundfunk.de/brf/mp3-128/internetradio", logo:"https://www.berliner-rundfunk.de//_nuxt/3e020671c5416fa80e6b805f4364f376.svg",stream:"https://top-stream-service.loverad.io/v1/br?"},
-
+    vradio_lebanon_fm:{id:"vradio_lebanon_fm",name:"Lebanon 89.5", country:"Lebanon",background:"virgin",fav:false,url:"http://node-26.zeno.fm/dwxw3p9vea0uv?rj-ttl=5&rj-tok=AAABdfuFcQ4AHao1lT3WKsmr6g",logo:"https://virginradiolb.com/assets/themes/TriTheme/images/logo.png",stream:null},
+    vradio_all_stars:{id:"vradio_all_stars",name:"All Stars Lebanon 89.7", country:"Lebanon",background:"virgin",fav:false,url:"http://node-25.zeno.fm/h66yxnapga0uv?rj-ttl=5&rj-tok=AAABfHPP9RIA5LSgnhKkmu7Wmw",logo:"https://virginradiolb.com/assets/themes/TriTheme/images/logo-stars.png",stream:null},
+    vradio_uk_fm:{id:"vradio_uk_fm",name:"Virgin UK", country:"UK",background:"virgin",fav:false,url:"https://radio.virginradio.co.uk/stream",logo:"https://virginradio.co.uk/virgin/assets/virginradiouk-thumbnail.png",stream:null},
 }
 
   //dynamically creating radio allStations
   let mainRadioDiv=document.querySelector(".radio_stations_body")
   let mainRadioDivDark=document.querySelector(".radio_stations_body_dark")
   let favRadioDiv=document.querySelector(".radio_stations_family_favourite")
+  let virginRadioDiv=document.querySelector(".radio_stations_virgin")
 
   for(x in allStations){
     let station=allStations[x]
@@ -552,6 +619,7 @@
     //creates img child
     let logo=document.createElement("img")
     logo.src=station.logo
+
     //creates a container DIv
     let fmContainer=document.createElement("div")
     fmContainer.classList="fm_container"
@@ -574,10 +642,16 @@
 
     //adding individual radio div to final div container
     if(station.background==="dark"){mainRadioDivDark.appendChild(newStation)}
+    else if (station.background==="virgin") {
+      logo.classList.add("img_square")
+      virginRadioDiv.appendChild(newStation)
+    }
     else{mainRadioDiv.appendChild(newStation)}
     if(station.fav===true){
+
       favRadioDiv.appendChild(newStation)
     }
+
 
   }
   // initialisi9ng variable for bu8tton and audio player
