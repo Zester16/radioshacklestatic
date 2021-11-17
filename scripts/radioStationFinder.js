@@ -5,7 +5,7 @@ async function getDatafromStream(stationName,streamUrl){
     let rep= await req(streamUrl)
     let parsedData={title:null,artist:null,songImgUrl:null,showName:null,host:null,}
     if(rep!==null){
-      if(stationName=='radio_klassik'){
+      if(stationName=='radio_klassik' || stationName=="radio_klassik_backup" ){
         let nowPlaying=rep[1]
          parsedData.title=nowPlaying.song_title
          parsedData.artist=nowPlaying.artist_name
