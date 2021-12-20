@@ -54,6 +54,14 @@
         margin:2px;
         visibility: visible;
       }
+      /* for cast cag */
+      google-cast-launcher{
+        width:30px;
+        height:30px;
+        padding-left: 2px;
+        margin:2px;
+        visibility: visible;
+      }
       /* Styling for brand name */
         .brand_name{
           font-family: 'Lobster', cursive;
@@ -330,7 +338,7 @@
         margin: 0;
         font-size: 2em;
         /* for making screen size relative */
-        padding-top:10%;
+        padding-top:20%;
         padding-bottom: 30%;
 
       }
@@ -462,8 +470,9 @@
     <div class="brand_name">
 
       <span>Radio Shackle</span>
-    </div>
 
+    </div>
+<google-cast-launcher id="google_cast_logo"></google-cast-launcher>
 
     <!-- Displays details of current track being played -->
 
@@ -514,7 +523,7 @@
     </div>
   </div>
   <div class="version_information">
-    version: 09.07
+    version: 10.09
   </div>
   <!-- Holds Now playing and other details -->
   <div class="footer">
@@ -576,11 +585,12 @@
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script>
   //this is main object containing all radio sattions
+
   let allStations={
     one_fm_913:{id:"one_fm_913",name:"One FM 913",country:"singapore",background:"white",fav:true,url:"https://22253.live.streamtheworld.com/ONE_FM_913.mp3",logo:"https://www.onefm.sg/wp-content/assets/3/img/NAV_01_Logo_913-new.svg",stream:null},
     money_fm_893:{id:"money_fm_893",name:"Money FM 893",country:"singapore",background:"white",fav:false,url:"https://22253.live.streamtheworld.com/MONEY_893.mp3",logo:"https://www.moneyfm893.sg/wp-content/assets/2/img/NAV_01_Logo_893.svg",stream:null},
     nrj_zurich_109:{id:"nrj_zurich_109",name:"Energy Zurich 109",country:"Swiss",background:"white",fav:false,url:"https://energyzuerich.ice.infomaniak.ch/energyzuerich-high.mp3", logo:"https://upload.wikimedia.org/wikipedia/en/5/54/Logo_NRJ_2016.png",stream:null},
-    q_fm_102:{id:"q_fm_102",name:"Dublins Q102",country:"Ireland",background:"white",fav:true,url:"https://wg.cdn.tibus.net/q102MP3128", logo:"https://mm.aiircdn.com/614/5d5fcba7241c4.png",stream:"https://www.q102.ie/radiofeed_request/?a=newer"},
+    q_fm_102:{id:"q_fm_102",name:"Dublins Q102",country:"Ireland",background:"white",fav:true,url:"https://wg.cdn.tibus.net/q102MP3128", logo:"https://mm.aiircdn.com/614/5d5fcba7241c4.png",stream:null},
     wrs_fm:{id:"wrs_fm",name:"World Rasio Swiss",country:"Swiss",background:"white",fav:false,url:"https://streamingr.broadcastradio.com:10295/wrs",logo:"https://mm.aiircdn.com/45/581c75ebd31ac.png",stream:null},
     sunny_fm_102:{id:"sunny_fm_102",name:"Sunny FM",country:"Utah, USA",background:"white",fav:false,url:"https://ice10.securenetsystems.net/KCLS", logo:"https://mysunny1015.com/wp-content/uploads/2019/03/logo-kcls-sunny-1015-dark-light.png",stream:null},
     rosj_fm_96:{id:"rosj_fm_96",name:"Rock of St George Utah",country:"Utah, USA",background:"dark",fav:false,url:"https://ice41.securenetsystems.net/KCLSHD2",logo:"https://rockstgeorge.com/wp-content/uploads/2019/03/logo-96X-rock-dark-light.png",stream:null},
@@ -596,13 +606,15 @@
     bloomberg_fm:{id:"bloomberg_fm",name:"Bloomberg Radio", country:"USA",background:"white",fav:true,url:"https://24423.live.streamtheworld.com/WBBRAMAAC48.aac",logo:"https://upload.wikimedia.org/wikipedia/commons/6/6b/Bloomberg_Radio.png",stream:null},
     bloomberg_fm_backup:{id:"bloomberg_fm_backup",name:"Bloomberg Backup", country:"USA",background:"white",url:"https://18843.live.streamtheworld.com/WBBRAMAAC48.aac",logo:"https://upload.wikimedia.org/wikipedia/commons/6/6b/Bloomberg_Radio.png",stream:null},
     max_fm_1039:{id:"max_fm_1039",name:"Max FM 103.9", country:"Canada",background:"dark",url:"https://mbsradio.leanstream.co/CFQMFM-MP3",logo:"https://1039maxfm.com/wp-content/uploads/sites/8/2021/02/MAX103-color.png",stream:null},
-    radio_bern_1:{id:"radio_bern_1",name:"Radio Bern 1", country:"Swiss",background:"white",fav:true,url:"https://mp3.radiobern1.ch/radiobern1128k", logo:"https://radioshackle-sjqq3.ondigitalocean.app/svg_and_images/radiobern1.png",stream:"https://www.radiobern1.ch/api/pub/gql/radiobern/AudioLiveData/e8ed774ebb6a811303ea3ff7078581730ff3914c?ttl=10&variables=%7B%22streamName%22%3A%22radiobern.main%22%7D"},
+    radio_bern_1:{id:"radio_bern_1",name:"Radio Bern 1", country:"Swiss",background:"white",fav:true,url:"https://mp3.radiobern1.ch/radiobern1128k", logo:"svg_and_images/radiobern1.png",stream:"https://www.radiobern1.ch/api/pub/gql/radiobern/AudioLiveData/e8ed774ebb6a811303ea3ff7078581730ff3914c?ttl=10&variables=%7B%22streamName%22%3A%22radiobern.main%22%7D"},
     radio_klassik:{id:"radio_klassik",name:"Radio Klassik", country:"Germany",background:"white",fav:true,url:"https://edge52.streams.klassikradio.de/klassikradio-deutschland", logo:"https://www.klassikradio.de//_nuxt/img/72ebcae.png",stream:"https://api.iris-next.radiorepo.io/stream-service/696fff20-62da-474f-a092-4898d41776f3?"},
     radio_rundfunk_914:{id:"radio_rundfunk_914",name:"Berliner Rundfunk 91.4", country:"Germany",background:"white",fav:false,url:"https://stream.berliner-rundfunk.de/brf/mp3-128/internetradio", logo:"https://www.berliner-rundfunk.de//_nuxt/3e020671c5416fa80e6b805f4364f376.svg",stream:"https://top-stream-service.loverad.io/v1/br?"},
     vradio_lebanon_fm:{id:"vradio_lebanon_fm",name:"Lebanon 89.5", country:"Lebanon",background:"virgin",fav:false,url:"http://node-26.zeno.fm/dwxw3p9vea0uv?rj-ttl=5&rj-tok=AAABdfuFcQ4AHao1lT3WKsmr6g",logo:"https://virginradiolb.com/assets/themes/TriTheme/images/logo.png",stream:null},
     vradio_all_stars:{id:"vradio_all_stars",name:"All Stars Lebanon 89.7", country:"Lebanon",background:"virgin",fav:false,url:"http://node-25.zeno.fm/h66yxnapga0uv?rj-ttl=5&rj-tok=AAABfHPP9RIA5LSgnhKkmu7Wmw",logo:"https://virginradiolb.com/assets/themes/TriTheme/images/logo-stars.png",stream:null},
     vradio_uk_fm:{id:"vradio_uk_fm",name:"Virgin UK", country:"UK",background:"virgin",fav:false,url:"https://radio.virginradio.co.uk/stream",logo:"https://virginradio.co.uk/virgin/assets/virginradiouk-thumbnail.png",stream:null},
     jazz_fm_rm:{id:"jazz_fm_rm",name:"Jazz FM", country:"Romania",background:"white",fav:false,url:"https://s4.radio.co/s1e25bf273/listen",logo:"https://jazzfm.ro/assets/images/assets_logo.svg",stream:null},
+    classic_praha:{id:"classic_praha",name:"Classic Praha", country:"Chez Republic",background:"white",fav:false,url:"https://icecast8.play.cz/classic128.mp3", logo:"https://www.radio.net/images/broadcasts/f9/e8/12702/c300.png",stream:null},
+    mujrozhals_jazz:{id:"mujrozhals_jazz",name:"ČRo Jazz", country:"Chez Republic",background:"white",fav:false,url:"https://rozhlas.stream/jazz_mp3_128.mp3", logo:"https://upload.wikimedia.org/wikipedia/commons/a/a8/CRo_Jazz_logo.png",stream:null},
     radio_klassik_backup:{id:"radio_klassik_backup",name:"Radio Klassik BKP", country:"Germany",background:"white",fav:false,url:"https://edge02.streams.klassikradio.de/klassikradio-deutschland", logo:"https://www.klassikradio.de//_nuxt/img/72ebcae.png",stream:"https://api.iris-next.radiorepo.io/stream-service/696fff20-62da-474f-a092-4898d41776f3?"},
 }
 
@@ -654,7 +666,12 @@
       favRadioDiv.appendChild(newStation)
     }
 
-
+    //initialising cast buttons
+    window['__onGCastApiAvailable'] = function(isAvailable) {
+  if (isAvailable) {
+    initializeCastApi();
+  }
+}
   }
   // initialisi9ng variable for bu8tton and audio player
   let btnOnClick=document.querySelectorAll(".play_radio")
@@ -673,6 +690,7 @@
   let nowPlayingSongArtist=document.querySelector("#now_playing_song_artist")
   let nowPlayingRadioShow=document.querySelector("#now_radio_show")
   let station=null;
+  let radioStationName=null;
   let intervalID=null;
   footer.style.visibility="collapse"
   nowPlaying.style.height='0px'
@@ -687,13 +705,64 @@
   //check whether song is being displayed
   let isSongDisplaying=false;
   let isStreamAvailable=null;
+
+  //cast variables
+  var castSession;
+  var castPlayerController;
+
   //play status constats
   const NOT_PLAYING=0;
   const PLAYING=1;
   const ERINPLAYING=2;
-  //takes care of radio selection
-  btnOnClick.forEach((button)=>{
 
+  //initialising cast castSession
+
+  initializeCastApi = async function() {
+  try{
+
+    cast.framework.CastContext.getInstance().setOptions({
+       receiverApplicationId: chrome.cast.media.DEFAULT_MEDIA_RECEIVER_APP_ID
+     });
+
+     console.log("initialising Cast")
+    castSession =   cast.framework.CastContext.getInstance().getCurrentSession();
+    console.log("init"+castSession)
+    let player = new cast.framework.RemotePlayer();
+    castPlayerController = new cast.framework.RemotePlayerController(player);
+  }
+    catch (error) {
+     console.log(error);
+
+ }
+}
+
+   //refrest cast variables
+
+   function refreshCastVariables(){
+     try {
+       console.log("refreshing cast variables")
+
+         castSession =   cast.framework.CastContext.getInstance().getCurrentSession();
+         let player = new cast.framework.RemotePlayer();
+         castPlayerController = new cast.framework.RemotePlayerController(player);
+         if(castSession){
+           mediaStatus = castSession.getMediaSession();
+           console.log(mediaStatus)
+
+     }
+
+  } catch (error) {
+    console.error(error);
+
+    // expected output: ReferenceError: nonExistentFunction is not defined
+    // Note - error messages will vary depending on browser
+  }
+}
+//********************RADIO PLAYER FUNCTIONS*************************//
+  //takes care of radio selection
+  btnOnClick.forEach( (button)=>{
+      let streamUrl=null
+      initializeCastApi()
       button.addEventListener("click",()=>{
         if (intervalID) {
         clearTimeout(intervalID);
@@ -701,169 +770,243 @@
         collapseUpButtonatStart()
          station=button.id
         audioPlayer.pause();
-          audioPlayer.src=""
+          //audioPlayer.src=""
+          //assigning radio station
           if(allStations[station]){
             var currentStation=allStations[station]
-            audioPlayer.src=currentStation.url
-            stationName.innerText=`${currentStation.name}`
-            stationLogo.src=currentStation.logo
-            clearTimeout(updateSongtrack);
-            isStreamAvailable=currentStation.stream
-            intervalID=setInterval(updateSongtrack,3000,currentStation.id,currentStation.stream);
-    //code goes here that will be run every 5 seconds.,
-
-
+            //audioPlayer.src=currentStation.url
+            stationName.innerText=""
+            streamUrl=currentStation.url
+            setStationDetails(currentStation.id,currentStation.name,currentStation.logo,currentStation.stream)
             }
             else{
-              audioPlayer.src="https://wg.cdn.tibus.net/q102MP3128"
-
-            }
-            buttonVisiblity(PLAYING)
+              audioPlayer.src="https://wg.cdn.tibus.net/q102MP3128" }
             console.log(`${allStations[station].id}`)
-            isPlaying=true;
-            footer.style.visibility="visible"
-            playButtonDesign();
-        audioPlayer.play();
+            refreshCastVariables()
+            console.log(castSession)
+            //castSession =   cast.framework.CastContext.getInstance().getCurrentSession();
+            if(castSession){
+
+              startRadioOnCast(streamUrl)
+              //initializeCastApi()
+            }
+            else{
+            audioPlayer.src=streamUrl
+            //audioPlayer.play();
+            }
+
         })
   })
-  //error Status
-  function buttonVisiblity(status){
+      //setting up of footer station and details
 
-    if(status===NOT_PLAYING){btnTopBar.style.visibility="hidden"}
-    if(status===PLAYING){btnTopBar.style.visibility="visible"}
-    if(status===ERINPLAYING){btnTopBar.style.visibility="hidden"}
-  }
-  // Audio player error Handeling
-  audioPlayer.addEventListener('error',(error)=>{
-    let code=error.target.error.code
-    let radioStation=stationName.innerText
-    if(code===4){
-      buttonVisiblity(ERINPLAYING)
-      alert(`Currently ${radioStation} is not available`)
-      stationName.innerText=radioStation+" Station Not Available"
+      function setStationDetails(stationID,cradioStationName,radioStationLogo,stationStream){
+        console.log("SETRADIODETAILS "+stationLogo)
+        radioStationName=cradioStationName
+        stationName.innerText =cradioStationName
+        //
+        clearTimeout(updateSongtrack);
+        stationLogo.src =radioStationLogo
+        isStreamAvailable=stationStream
+        intervalID=setInterval(updateSongtrack,3000,stationID,stationStream);
+        buttonVisiblity(PLAYING)
+        isPlaying=true;
+        footer.style.visibility="visible"
+        playButtonDesign();
+      }
+      //error Status
+      function buttonVisiblity(status){
 
+        if(status===NOT_PLAYING){btnTopBar.style.visibility="hidden"}
+        if(status===PLAYING){btnTopBar.style.visibility="visible"}
+        if(status===ERINPLAYING){btnTopBar.style.visibility="hidden"}
+      }
+
+      ///Top bar  Button Play Status
+      btnTopBar.addEventListener('click',()=>{
+        //initializeCastApi()
+        refreshCastVariables()
+          //isPlaying=false;
+          if(castSession){
+              castPlayerControllerforAudio()
+          }
+          else{
+            if(isPlaying){
+              audioPlayer.pause()
+              audioPlayerPause()
+              console.log("play button condition :"+isPlaying)
+            }
+              else {audioPlayer.play();}
+              //console.log("play button condition :"+isPlaying)
+
+          }
+
+      })
+
+
+      //play button design
+      function playButtonDesign(){
+        if(isPlaying){
+          btnTopBar.innerHTML="II"
+        }
+        else{
+          btnTopBar.innerHTML=">"
+        }
+      }
+      /******** Mute Button Functions ********/
+      //Mute Functionality for Button
+      //Mute Functionality
+      btnMute.addEventListener("click",()=>{
+        if(isMute){
+          audioPlayer.muted=false;
+        }
+        else{
+          audioPlayer.muted=true;
+        }
+
+      })
+
+
+      //mute button Functionality
+      function muteButtonDesign(){
+      if(!isMute) btnMute.src=unmuteImage;
+      else btnMute.src=btnMute.src=muteImage
+      }
+
+/*********** UP BUTTON FOR SONG DISPLAY***************/
+    //button logic for upButton, which will show DIv
+    upButton.addEventListener('click',()=>{
+    if(isStreamAvailable!==null){
+      if(isSongDisplaying){
+        nowPlaying.visibility='collapse'
+        nowPlaying.style.height='0px'
+        upButton.classList.add("song_details_button_rotate")
+
+      }
+      else {
+        nowPlaying.visibility='visible'
+        nowPlaying.style.height='auto'
+        upButton.classList.remove("song_details_button_rotate")
+      }
+      isSongDisplaying=!isSongDisplaying
+      //upButton.classList.toggle('song_details_button_rotate')
+
+    }
+
+
+    })
+    //for getting data of what is playing
+    async function updateSongtrack(stationId,streamUrl){
+    // console.log(stationId)
+    // console.log(streamUrl)
+      if(streamUrl===null){
+        nowPlaying.visiblility='collapse'
+
+      }
+      else {
+        data =   await getDatafromStream(stationId,streamUrl)
+        if(data!== null){
+          nowPlayingSongImage.src=data.songImgUrl
+          nowPlayingSongName.innerHTML=data.title
+          nowPlayingSongArtist.innerHTML=data.artist
+          nowPlayingRadioShow.innerHTML=data.showName
+        }
+        //console.log(data)
+
+        }
+      }
+    //collapse up button
+    function collapseUpButtonatStart(){
+      nowPlaying.visibility='collapse'
+      nowPlaying.style.height='0px'
+      upButton.classList.add("song_details_button_rotate")
+    }
+
+
+
+//**************END OF FOOTER AUDIO PLAYER CONTROLS*************///
+
+//*****************ALL CONTROLS OF MEDIA PLAYER CHROME STARTS **************//
+// Audio player error Handeling
+    audioPlayer.addEventListener('error',(error)=>{
+      let code=error.target.error.code
+      let radioStation=radioStationName
+      if(code===4){
+        buttonVisiblity(ERINPLAYING)
+        alert(`Currently ${radioStation} is not available`)
+        stationName.innerText=radioStation+" Station Not Available"
+
+        isPlaying=false;
+        playButtonDesign();
+      }
+      console.log(error.target.error.code)
+
+    })
+    //audip player pauses
+    function audioPlayerPause(){
+      console.log("Radio Paused")
       isPlaying=false;
       playButtonDesign();
+
     }
-    console.log(error.target.error.code)
+    //audio player pause event listener, when someone pauses from button or bluetooth
+    audioPlayer.addEventListener('pause',()=>{
+      audioPlayerPause()
+    })
+    //audio player play event listener when someone plays radio from button or bluetooth
+    audioPlayer.addEventListener("play",()=>{
+      console.log("Radio Play")
+      isPlaying=true;
+      playButtonDesign();
+    })
 
-  })
-  ///Top bar  Button Play Status
-  btnTopBar.addEventListener('click',()=>{
-    if(isPlaying)
-      //isPlaying=false;
-      audioPlayer.pause()
 
-    else audioPlayer.play();
-
-
-
-  })
-  //audio player pause event listener, when someone pauses from button or bluetooth
-  audioPlayer.addEventListener('pause',()=>{
-    console.log("Radio Paused")
-    isPlaying=false;
-    playButtonDesign();
-  })
-  //audio player play event listener when someone plays radio from button or bluetooth
-  audioPlayer.addEventListener("play",()=>{
-    console.log("Radio Play")
-    isPlaying=true;
-    playButtonDesign();
-  })
-
-  //play button design
-  function playButtonDesign(){
-    if(isPlaying){
-      btnTopBar.innerHTML="II"
+  //Mute Function
+  audioPlayer.addEventListener('volumechange',()=>{
+      console.log(audioPlayer.volume)
+    if(audioPlayer.muted===true||audioPlayer.volume==0){
+      console.log('Its Muted BE')
+      isMute=true
+      muteButtonDesign();
     }
     else{
-      btnTopBar.innerHTML=">"
+      console.log('its not muted')
+      isMute=false
+      muteButtonDesign();
+    }
+
+
+  })
+  ////*******************END OF ALL CHROME MEDIA PLAYER FUNCTIONS*************///
+
+  ///**********************START OF CHROME CAST MEDIA PLAYER *****************//
+  //cast playerController for uploading url into chrome cast device
+  async function  startRadioOnCast(streamUrl){
+    //initializeCastApi()
+    if(castSession){
+      console.log(streamUrl)
+        var mediaInfo = new chrome.cast.media.MediaInfo(streamUrl, "audio/mp3");
+       var request = await new chrome.cast.media.LoadRequest(mediaInfo);
+        if(castSession){
+          castSession.loadMedia(request).then(
+            function() { console.log('Load succeed'); },
+            function(errorCode) { console.log('Error code: ' + errorCode); });
+            var player = await new cast.framework.RemotePlayer();
+            castPlayerController= await new cast.framework.RemotePlayerController(player);
+
     }
   }
-
-  //Mute Functionality for Button
-  //Mute Functionality
-  btnMute.addEventListener("click",()=>{
-    if(isMute){
-      audioPlayer.muted=false;
-    }
-    else{
-      audioPlayer.muted=true;
-    }
-
-  })
-
-
-//mute button Functionality
-function muteButtonDesign(){
-  if(!isMute) btnMute.src=unmuteImage;
-  else btnMute.src=btnMute.src=muteImage
 }
-//Mute Function
-audioPlayer.addEventListener('volumechange',()=>{
-    console.log(audioPlayer.volume)
-  if(audioPlayer.muted===true||audioPlayer.volume==0){
-    console.log('Its Muted BE')
-    isMute=true
-    muteButtonDesign();
-  }
-  else{
-    console.log('its not muted')
-    isMute=false
-    muteButtonDesign();
-  }
-
-
-})
-//button logic for upButton, which will show DIv
-upButton.addEventListener('click',()=>{
-if(isStreamAvailable!==null){
-  if(isSongDisplaying){
-    nowPlaying.visibility='collapse'
-    nowPlaying.style.height='0px'
-    upButton.classList.add("song_details_button_rotate")
-
-  }
-  else {
-    nowPlaying.visibility='visible'
-    nowPlaying.style.height='auto'
-    upButton.classList.remove("song_details_button_rotate")
-  }
-  isSongDisplaying=!isSongDisplaying
-  //upButton.classList.toggle('song_details_button_rotate')
-
+  ///controlling play button for audio player for cast
+  function castPlayerControllerforAudio(){
+    console.log("Cast Player "+isPlaying+castPlayerController)
+    //refreshCastVariables()
+    castPlayerController.playOrPause()
+    isPlaying=!isPlaying
+    playButtonDesign()
 }
 
 
-})
-//for getting data of what is playing
-async function updateSongtrack(stationId,streamUrl){
-// console.log(stationId)
-// console.log(streamUrl)
-  if(streamUrl===null){
-    nowPlaying.visiblility='collapse'
-
-  }
-  else {
-    data =   await getDatafromStream(stationId,streamUrl)
-    if(data!== null){
-      nowPlayingSongImage.src=data.songImgUrl
-      nowPlayingSongName.innerHTML=data.title
-      nowPlayingSongArtist.innerHTML=data.artist
-      nowPlayingRadioShow.innerHTML=data.showName
-    }
-    //console.log(data)
-
-    }
-  }
-  //collapse up button
-  function collapseUpButtonatStart(){
-    nowPlaying.visibility='collapse'
-    nowPlaying.style.height='0px'
-    upButton.classList.add("song_details_button_rotate")
-  }
 
   </script>
-
+  <script src="https://www.gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1"></script>
 </html>
