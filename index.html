@@ -523,7 +523,7 @@
     </div>
   </div>
   <div class="version_information">
-    version: 10.09
+    version: 11.01
   </div>
   <!-- Holds Now playing and other details -->
   <div class="footer">
@@ -669,6 +669,7 @@
     //initialising cast buttons
     window['__onGCastApiAvailable'] = function(isAvailable) {
   if (isAvailable) {
+
     initializeCastApi();
   }
 }
@@ -717,18 +718,52 @@
 
   //initialising cast castSession
 
-  initializeCastApi = async function() {
+  initializeCastApi = function() {
   try{
 
     cast.framework.CastContext.getInstance().setOptions({
        receiverApplicationId: chrome.cast.media.DEFAULT_MEDIA_RECEIVER_APP_ID
      });
-
+     setTimeout(checkAndUpdatePreviousCast, 5000)
      console.log("initialising Cast")
-    castSession =   cast.framework.CastContext.getInstance().getCurrentSession();
-    console.log("init"+castSession)
+     castContext = cast.framework.CastContext.getInstance();
+     castSession =   cast.framework.CastContext.getInstance().getCurrentSession();
+     //delaying it delibrately to kick start castSession
+
+    //initializing player
+  //
     let player = new cast.framework.RemotePlayer();
     castPlayerController = new cast.framework.RemotePlayerController(player);
+    ///CAST EVENT LISTENERS
+    ///checks whether a radio station is playing on refresh. if a station is playing,
+    //it will pass details of station to setStationDetails function
+
+
+    //adding event listener to CastContext for pausing and playing media
+      castPlayerController.addEventListener(
+      cast.framework.RemotePlayerEventType.IS_PAUSED_CHANGED, function()
+      {
+        let mediaSessionStatus = castSession.getMediaSession();
+        let castStationPlaying = mediaSessionStatus.media.contentId
+        let currentPlayingStatus =mediaSessionStatus.playerState
+         //console.log(mediaSessionStatus.media.contentId)
+           //console.log(mediaSessionStatus.playerState);
+           if(currentPlayingStatus == "PAUSED")
+           {
+             isPlaying=false;
+             playButtonDesign()
+           }
+           else if(currentPlayingStatus == "PLAYING")
+           {
+             isPlaying=true;
+             playButtonDesign()
+           }
+
+          // Update local player to disconnected state
+
+      });
+
+
   }
     catch (error) {
      console.log(error);
@@ -736,9 +771,10 @@
  }
 }
 
-   //refrest cast variables
+   //refrest cast variables and handeling error if any
 
-   function refreshCastVariables(){
+   function refreshCastVariables()
+   {
      try {
        console.log("refreshing cast variables")
 
@@ -751,16 +787,19 @@
 
      }
 
-  } catch (error) {
+  }
+  catch (error)
+  {
     console.error(error);
 
     // expected output: ReferenceError: nonExistentFunction is not defined
     // Note - error messages will vary depending on browser
+    }
   }
-}
 //********************RADIO PLAYER FUNCTIONS*************************//
   //takes care of radio selection
-  btnOnClick.forEach( (button)=>{
+  btnOnClick.forEach( (button)=>
+  {
       let streamUrl=null
       initializeCastApi()
       button.addEventListener("click",()=>{
@@ -799,7 +838,8 @@
   })
       //setting up of footer station and details
 
-      function setStationDetails(stationID,cradioStationName,radioStationLogo,stationStream){
+      function setStationDetails(stationID,cradioStationName,radioStationLogo,stationStream)
+      {
         console.log("SETRADIODETAILS "+stationLogo)
         radioStationName=cradioStationName
         stationName.innerText =cradioStationName
@@ -996,14 +1036,47 @@
     }
   }
 }
-  ///controlling play button for audio player for cast
+  ///controlling play button for audio player for cast - below toggles play and pause,
+  //rest is handeled by event listener at init function
   function castPlayerControllerforAudio(){
-    console.log("Cast Player "+isPlaying+castPlayerController)
+    //console.log("Cast Player "+isPlaying+castPlayerController)
     //refreshCastVariables()
     castPlayerController.playOrPause()
-    isPlaying=!isPlaying
-    playButtonDesign()
+
 }
+// checks whether any previous cast putton is present
+function checkAndUpdatePreviousCast()
+{
+  try
+  {
+    refreshCastVariables()
+    if(castSession)
+    {
+      console.log("CAST CHECK and Update");
+      let mediaSessionStatus = castSession.getMediaSession();
+      let castStationPlaying = mediaSessionStatus.media.contentId;
+      if(castStationPlaying)
+      {
+        for( const x in allStations)
+        {
+         if (castStationPlaying == allStations[x]["url"])
+         {
+           var currentStation=allStations[x];
+           setStationDetails(currentStation.id,currentStation.name,currentStation.logo,currentStation.stream)
+         }
+       }
+      }
+    }
+
+  }
+  catch(error)
+  {
+    console.log("CAST CURRENT PLAY ERRROR"+error);
+  }
+
+}
+
+//checks if
 
 
 
