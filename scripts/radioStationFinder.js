@@ -76,7 +76,24 @@ async function getDatafromStream(stationName,streamUrl,picUrl,streamType){
         parsedData.artist = "N/A"
         parsedData.title=nowPlaying.song
         parsedData.songImgUrl=picUrl
-        
+
+      }
+      else if(stationName === "lounge_fm_936")
+      {
+        let nowPlaying=rep
+        parsedData.artist = nowPlaying.artist
+        parsedData.title=nowPlaying.title
+        parsedData.songImgUrl=nowPlaying.coverUrlM
+
+      }
+      else if(stationName === "radio_classique")
+      {
+
+        let nowPlaying=rep
+        parsedData.artist = nowPlaying.auteur
+        parsedData.title=nowPlaying.titre
+        parsedData.songImgUrl=picUrl
+
       }
     }
 
