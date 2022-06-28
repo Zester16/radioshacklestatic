@@ -1,0 +1,20 @@
+.background {
+  background: center no-repeat hex("#14213D");
+}
+
+.logo {
+  background-image: url("https://radioshackle-sjqq3.ondigitalocean.app/svg_and_images/radio_shackle.svg");
+}
+
+.progressBar {
+  background-color: rgb(238, 255, 65);
+}
+
+/* .splash {
+  background-image: url(splash.png);
+} */
+
+.watermark {
+  background-image: url("https://radioshackle-sjqq3.ondigitalocean.app/svg_and_images/radio_shackle.svg");
+  background-size: 57px 57px;
+}
