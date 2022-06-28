@@ -1,5 +1,5 @@
 .background {
-  background: center no-repeat hex("#14213D");
+  background: center no-repeat rgb(20, 33, 61);
 }
 
 .logo {
@@ -7,7 +7,7 @@
 }
 
 .progressBar {
-  background-color: rgb(238, 255, 65);
+  background-color: rgb(255, 255, 255);
 }
 
 /* .splash {
