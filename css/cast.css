@@ -1,5 +1,6 @@
 .background {
   background: center no-repeat rgb(20, 33, 61);
+  background-size: 200px 200px;
 }
 
 .logo {
