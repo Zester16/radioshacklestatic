@@ -1101,7 +1101,8 @@
         var mediaInfo = new chrome.cast.media.MediaInfo(streamUrl, "audio/mp3");
         mediaInfo.metadata = new chrome.cast.media.MusicTrackMediaMetadata()
         mediaInfo.metadata.artist = `Now Playing ${stationName}`;
-        
+        var castImage = new chrome.cast.Image(stationImage);
+        mediaInfo.metadata.images = [castImage]
        var request = await new chrome.cast.media.LoadRequest(mediaInfo);
         if(castSession){
           castSession.loadMedia(request).then(
