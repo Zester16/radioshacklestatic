@@ -775,6 +775,7 @@
        //receiverApplicationId: chrome.cast.media.DEFAULT_MEDIA_RECEIVER_APP_ID
 
        //below runs on digital ocean
+       //this is just beautification of css file
        //receiverApplicationId: "1608CFCA",
        receiverApplicationId: "DCCBA205",
        autoJoinPolicy: chrome.cast.AutoJoinPolicy.ORIGIN_SCOPED
@@ -1098,6 +1099,8 @@
     if(castSession){
       console.log(streamUrl)
         var mediaInfo = new chrome.cast.media.MediaInfo(streamUrl, "audio/mp3");
+        mediaInfo.metadata = new chrome.cast.media.MusicTrackMediaMetadata()
+        mediaInfo.metadata.artistName = "Haha";
        var request = await new chrome.cast.media.LoadRequest(mediaInfo);
         if(castSession){
           castSession.loadMedia(request).then(
