@@ -900,7 +900,7 @@
             //castSession =   cast.framework.CastContext.getInstance().getCurrentSession();
             if(castSession){
 
-              startRadioOnCast(streamUrl)
+              startRadioOnCast(streamUrl,currentStation.name,currentStation.logo)
               //initializeCastApi()
             }
             else{
@@ -1094,13 +1094,14 @@
 
   ///**********************START OF CHROME CAST MEDIA PLAYER *****************//
   //cast playerController for uploading url into chrome cast device
-  async function  startRadioOnCast(streamUrl){
+  async function  startRadioOnCast(streamUrl, stationName,stationImage){
     //initializeCastApi()
     if(castSession){
       console.log(streamUrl)
         var mediaInfo = new chrome.cast.media.MediaInfo(streamUrl, "audio/mp3");
         mediaInfo.metadata = new chrome.cast.media.MusicTrackMediaMetadata()
-        mediaInfo.metadata.artistName = "Haha";
+        mediaInfo.metadata.artist = `Now Playing ${stationName}`;
+        
        var request = await new chrome.cast.media.LoadRequest(mediaInfo);
         if(castSession){
           castSession.loadMedia(request).then(
